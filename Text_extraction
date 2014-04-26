@@ -1,0 +1,38 @@
+#Apr25 test on celebrity data set user topics
+
+from gensim import corpora, models, similarities
+import os
+import sys
+import fnmatch
+import pdb
+all_user_folder = "../timelines/"
+for user_name in os.listdir(all_user_folder):
+    user_folder = os.path.join(all_user_folder, user_name)
+    if os.path.isdir(user_folder):
+        user_all_text = user_name + '_text'
+        with open(os.path.join(user_folder, user_all_text),'a') as result:
+            for crawling_date in os.listdir(user_folder):
+                print "username:"
+                print user_name
+                print 'date'
+                print crawling_date
+                date_folder = os.path.join(user_folder,crawling_date)
+                if os.path.isdir(date_folder):
+                    # print 'reach date folder'
+                    for text_file_names in os.listdir(date_folder):
+                        # print 'find text file'
+                        with open(os.path.join(date_folder,text_file_names), 'r')as data:
+                            read_one = False
+                            for line in data:
+                                # print 'successfully read lines'
+                                if read_one:
+                                    if line[0] == 'V':
+                                        text_result = line[1:]
+                                        # print '----------------'
+                                        result_text = text_result.decode('unicode-escape')
+                                        print result_text
+                                        result.write(result_text.encode('utf-8'))
+                                        # print '=.='
+                                    read_one = False
+                                elif line.strip() in ['p2','p5']:
+                                    read_one = True
