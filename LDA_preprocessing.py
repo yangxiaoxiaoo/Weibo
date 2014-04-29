@@ -25,7 +25,3 @@ corpus = [id2word.doc2bow(doc_text) for doc_text in cop_wlist]
 corpora.MmCorpus.serialize('../Weibo_corpus.mm',corpus)
 print "------------------------------corpus--------------------------------------"
 print(corpus)
-
-mm = gensim.corpora.MmCorpus('../Weibo_corpus.mm')
-print mm
-#mm is the corpus iterator, it should contain documents

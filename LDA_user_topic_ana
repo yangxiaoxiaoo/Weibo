@@ -1,0 +1,16 @@
+import logging, gensim, bz2
+import os
+from gensim import corpora, models, similarities
+logging.basicConfig(filename='../LDA 20 topics', filemode='a', format='%(asctime)s:%(levelname)s:%(message)s',level=logging.INFO)
+#load the corpus iterator mm
+corpus_this = gensim.corpora.MmCorpus('../Weibo_corpus.mm')
+tfidf = models.TfidfModel(corpus_this)
+lda = models.LdaModel.load('../Weibo_corpus_LDA.lda')
+lda.print_topics(20)
+corpus_ftidf = tfidf[corpus_this]
+for doc in corpus_ftidf:
+    #This is user bag of words distribution
+    user_topic_file = open("../User_topoic_Distrubution",'a')
+    print >> user_topic_file, doc
+
+
