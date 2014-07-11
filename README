@@ -1,0 +1,15 @@
+Weibo is the git repository
+Data is kept on achtung and run there
+
+May2 2014
+Substituting original dictionary to Sogo dictionary with 6120358 lines
+Upload code to server
+run from tokenization
+
+May12 2014
+User Comment Number: UserCommentCDP
+82% less then 2.3( one or 2)
+
+Jun23 2014
+Unicode encode bug fixed, see
+http://stackoverflow.com/questions/20022482/python-unicode-force-convert-to-ascii-str

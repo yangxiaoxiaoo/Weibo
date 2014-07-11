@@ -1,0 +1,3 @@
+#test unicode inputs
+u1 = u\1F347
+print u1

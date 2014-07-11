@@ -1,7 +1,13 @@
+import gensim
 import os
-from gensim import corpora, models, similarities
+#Jul 7 old lda new commenter
 
-documents_folder = "../UserTokenized_2/"
+Commenter = "../CommentUser/"
+lda = gensim.models.LdaModel.load('../C_Weibo_corpus_LDA.lda')
+
+lda = gensim.models.LdaModel(chunksize=1)
+documents_folder = "../CommentUserTokenized/"
+id2word = gensim.corpora.Dictionary.load("../C_temp_corpus_dict")
 #corpus
 cop_wlist = []
 for user_doc in os.listdir(documents_folder):
@@ -14,6 +20,5 @@ for user_doc in os.listdir(documents_folder):
         for word in line.split(' '):
             doc_wlist.append(word)
     cop_wlist.append(doc_wlist)
-dictionary = corpora.Dictionary(cop_wlist)
-dictionary.save('../temp_corpus_dict')
-print(dictionary)
+    doc_vector = id2word.doc2bow(doc_wlist)
+    lda.inference(doc_vector, False)

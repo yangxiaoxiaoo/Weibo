@@ -1,4 +1,5 @@
 #Apr28 modified tokenize
+#May14 tokenize2: double check new sogou dict
 #for every line
 import os
 #from threading import Thread
@@ -11,16 +12,22 @@ seg = SEG()
 all_user_folder = "../timelines/"
 for user_name in os.listdir(all_user_folder):
     user_folder = os.path.join(all_user_folder, user_name)
+  #  print "join folder"
     if os.path.isdir(user_folder):
+      #  print "is dir"
         user_all_text = user_name + '_text'
         user_tokenized_text = user_name + '_tokenized'
+
+        print "corpus is:"
+        print user_folder + user_all_text
         with open(os.path.join(user_folder, user_all_text),'r') as user_text_corpus:
+        #    print "in corpus"
             for line in user_text_corpus:
-              #  print line
+                print line
                 #every line of tweets has a list of words wlist
                 wlist = seg.cut(line)
                 wlist.reverse()
-              #  print wlist
+                print wlist
                 tmp = " ".join(wlist)
-                fout = open(os.path.join("../UserTokenized", user_tokenized_text),'a')
+                fout = open(os.path.join("../UserTokenized_2", user_tokenized_text),'a')
                 fout.write(tmp.encode('utf-8'))

@@ -1,0 +1,18 @@
+#Commenter LDA
+#including logging, and since we don't need bag of words analysis, all printed information in logging file
+#end of LDA in commenters
+
+import logging, gensim, bz2
+import os
+from gensim import corpora, models, similarities
+logging.basicConfig(filename='../C_LDA_20_topics_10_05', filemode='a', format='%(asctime)s:%(levelname)s:%(message)s',level=logging.INFO)
+#load dictionary
+dictionary = gensim.corpora.Dictionary.load("../C_temp_corpus_dict_10_05")
+#load the corpus iterator mm
+corpus_this = gensim.corpora.MmCorpus('../C_Weibo_corpus.mm')
+tfidf = models.TfidfModel(corpus_this)
+#print (corpus_this)
+#LDA model transformation
+lda = models.LdaModel(corpus= corpus_this,num_topics = 100,id2word=dictionary,update_every=1)
+lda.print_topics(100)
+lda.save('../C_Weibo_corpus_LDA.lda')
